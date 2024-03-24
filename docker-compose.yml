@@ -1,0 +1,39 @@
+version: '3.3'
+
+networks:
+  commons-app:
+    driver: bridge
+
+services:
+  postgres-db-catalogo:
+    image: postgres
+    restart: always
+    container_name: postgres-db-catalogo
+    environment:
+      POSTGRES_PASSWORD: "postgres"
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data
+    networks:
+      - commons-app
+  adapter-rest-catalogo:
+    build:
+      context: adapter-db
+      dockerfile: adapter-rest/Dockerfile
+    restart: always
+    container_name: adapter-rest-catalogo
+    environment:
+      - DB_URL=jdbc:postgresql://postgres-db-catalogo:5432/postgres?currentSchema=public
+      - DB_USER=postgres
+      - DB_PASSWORD=postgres
+    ports:
+      - "8081:8081"
+    networks:
+      - commons-app
+    depends_on:
+      - postgres-db-catalogo
+
+volumes:
+  data:
+    external: true
