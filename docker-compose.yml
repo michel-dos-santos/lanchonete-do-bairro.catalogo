@@ -28,7 +28,7 @@ services:
       - DB_USER=postgres
       - DB_PASSWORD=postgres
     ports:
-      - "8081:8081"
+      - "8051:8051"
     networks:
       - commons-app
     depends_on:
