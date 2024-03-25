@@ -50,6 +50,8 @@ public class ProductController {
     private DeleteProductUsecase deleteProductUsecase;
     @Autowired
     private FindProductsByCategoryIDUsecase findProductsByCategoryIDUsecase;
+    @Autowired
+    private FindProductsByIDUsecase findProductsByIDUsecase;
 
     @ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Indica que a criação do produto foi executada com sucesso") })
     @Operation(summary = "Persiste os dados do produto e associa a categoria")
@@ -59,7 +61,7 @@ public class ProductController {
     public ProductOutputDTO saveProduct(@RequestBody @Valid ProductInputDTO productInputDTO) throws APIException {
         try {
             Product product = productInputMapper.mapProductFromProductInputDTO(productInputDTO);
-            return productOutputMapper.mapProductOutputDTOFromOrder(saveProductUsecase.save(product));
+            return productOutputMapper.mapProductOutputDTOFromProduct(saveProductUsecase.save(product));
         } catch (Exception e) {
             throw APIException.internalError("Erro interno", Collections.singletonList(e.getMessage()));
         }
@@ -103,6 +105,19 @@ public class ProductController {
             @RequestBody ProductPatchInputDTO productPatchInputDTO) throws APIException {
         try {
             updateProductFieldsUsecase.update(productInputMapper.mapProductFromProductPatchInputDTO(productPatchInputDTO, id));
+        } catch (Exception e) {
+            throw APIException.internalError("Erro interno", Collections.singletonList(e.getMessage()));
+        }
+    }
+
+    @ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Indica que a busca do produto pelo seu identificador foi executada com sucesso") })
+    @Operation(summary = "Busca os dados do produto com base no seu identificador")
+    @Counted(value = "execution.count.getProductById")
+    @Timed(value = "execution.time.getProductById", longTask = true)
+    @GetMapping(value = "/{id}")
+    public ProductOutputDTO getProductById(@PathVariable UUID id) throws APIException {
+        try {
+            return productOutputMapper.mapProductOutputDTOFromProduct(findProductsByIDUsecase.findByID(id));
         } catch (Exception e) {
             throw APIException.internalError("Erro interno", Collections.singletonList(e.getMessage()));
         }

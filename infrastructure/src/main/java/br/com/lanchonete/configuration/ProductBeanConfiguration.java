@@ -44,4 +44,8 @@ public class ProductBeanConfiguration {
         return new FindProductsByCategoryIDUsecase(productRepository, logRepository);
     }
 
+    @Bean
+    FindProductsByIDUsecase findProductsByID(LogRepository logRepository, ProductRepository productRepository) {
+        return new FindProductsByIDUsecase(productRepository, logRepository);
+    }
 }

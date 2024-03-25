@@ -15,7 +15,7 @@ public class ProductOutputMapper {
     @Autowired
     private ModelMapper modelMapper;
 
-    public ProductOutputDTO mapProductOutputDTOFromOrder(Product product) {
+    public ProductOutputDTO mapProductOutputDTOFromProduct(Product product) {
         return modelMapper.map(product, ProductOutputDTO.class);
     }
 
