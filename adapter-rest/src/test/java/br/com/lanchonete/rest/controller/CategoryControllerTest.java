@@ -1,8 +1,6 @@
 package br.com.lanchonete.rest.controller;
 
 import br.com.lanchonete.model.Category;
-import br.com.lanchonete.port.usecase.category.FindAllCategory;
-import br.com.lanchonete.port.usecase.category.SaveCategory;
 import br.com.lanchonete.rest.controllers.CategoryController;
 import br.com.lanchonete.rest.mappers.inputs.CategoryInputMapper;
 import br.com.lanchonete.rest.mappers.inputs.dtos.CategoryInputDTO;
@@ -13,26 +11,22 @@ import br.com.lanchonete.usecase.category.SaveCategoryUsecase;
 import com.fasterxml.jackson.core.type.TypeReference;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mockito;
 import org.mockito.exceptions.base.MockitoException;
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.ResultActions;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatList;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static org.springframework.http.MediaType.APPLICATION_JSON;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(SpringExtension.class)
