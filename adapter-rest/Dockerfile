@@ -24,7 +24,7 @@ WORKDIR /app
 COPY --from=builder /app .
 
 # Exponha a porta em que a aplicação Spring Boot irá escutar (substitua pela porta correta)
-EXPOSE 8081
+EXPOSE 8011
 
 # Comando para executar a aplicação Spring Boot
 ENTRYPOINT [ "java", "-jar", "/app/adapter-rest/target/adapter-rest-1.0.0.jar", "--spring.datasource.url=${DB_URL}", "--spring.datasource.username=${DB_USER}", "--spring.datasource.password=${DB_PASSWORD}" ]
