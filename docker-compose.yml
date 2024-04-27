@@ -33,6 +33,8 @@ services:
       - commons-app
     depends_on:
       - postgres-db-catalog
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
 
 volumes:
   data:
