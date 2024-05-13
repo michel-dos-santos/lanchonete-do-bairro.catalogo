@@ -26,7 +26,6 @@ public class ProductEntity {
     @Column(columnDefinition = "uuid")
     private UUID id;
     @CreatedDate
-    @Column(nullable = false, updatable = false)
     private Date createdAt;
     @LastModifiedDate
     private Date updatedAt;
