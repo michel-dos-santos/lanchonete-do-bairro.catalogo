@@ -10,7 +10,7 @@ services:
     restart: always
     container_name: postgres-db-catalog
     environment:
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD_CATALOG}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
     ports:
       - "5433:5432"
     volumes:
@@ -24,9 +24,9 @@ services:
     restart: always
     container_name: adapter-rest-catalog
     environment:
-      - DB_URL=${DB_URL_CATALOG}
-      - DB_USER=${DB_USER_CATALOG}
-      - DB_PASSWORD=${DB_PASSWORD_CATALOG}
+      - DB_URL=${DB_URL}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
     ports:
       - "8011:8011"
     networks:
